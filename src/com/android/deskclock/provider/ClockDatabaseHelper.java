@@ -137,6 +137,15 @@ class ClockDatabaseHelper extends SQLiteOpenHelper {
     }
 
     @Override
+    public void onDowngrade(SQLiteDatabase db, int oldVersion, int currentVersion) {
+        if (oldVersion == 11 && currentVersion == 7) {
+            LogUtils.i("Downgrade from v11 to v7");
+        } else {
+            super.onDowngrade(db, oldVersion, currentVersion);
+        }
+    }
+
+    @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int currentVersion) {
         LogUtils.v("Upgrading alarms database from version "
                 + oldVersion + " to " + currentVersion);
